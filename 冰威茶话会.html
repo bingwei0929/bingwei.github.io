@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冰威茶话会·高考祝福</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#EC4899',
+                        accent: '#8B5CF6',
+                        gold: '#FBBF24',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            }
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+            .animate-float-delay-1 {
+                animation: float 6s ease-in-out 1s infinite;
+            }
+            .animate-float-delay-2 {
+                animation: float 6s ease-in-out 2s infinite;
+            }
+            .animate-float-delay-3 {
+                animation: float 6s ease-in-out 3s infinite;
+            }
+            .animate-float-delay-4 {
+                animation: float 6s ease-in-out 4s infinite;
+            }
+            .animate-float-delay-5 {
+                animation: float 6s ease-in-out 5s infinite;
+            }
+            .bg-gradient-sunset {
+                background: linear-gradient(135deg, #FF9D6C 0%, #FF6B6B 50%, #8A2387 100%);
+            }
+            .backdrop-blur {
+                backdrop-filter: blur(8px);
+            }
+            .page-transition {
+                transition: transform 0.5s ease-in-out;
+            }
+            .countdown-number {
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+                position: relative;
+            }
+            .countdown-number::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                height: 3px;
+                background: rgba(251, 191, 36, 0.6);
+                border-radius: 3px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .countdown-number:hover {
+                transform: scale(1.05);
+            }
+            .countdown-number:hover::after {
+                opacity: 1;
+            }
+            .animate-pulse-slow {
+                animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+            .animate-shimmer {
+                background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+                background-size: 200% 100%;
+                animation: shimmer 2s infinite;
+            }
+            .text-glow {
+                text-shadow: 0 0 10px rgba(251, 191, 36, 0.7), 0 0 20px rgba(251, 191, 36, 0.4);
+            }
+            .footer-text {
+                transition: all 0.3s ease;
+                display: inline-block;
+            }
+            .footer-text:hover {
+                transform: translateY(-3px);
+                text-shadow: 0 0 15px rgba(251, 191, 36, 0.9);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-hidden bg-black">
+    <!-- 动态背景 -->
+    <div id="sunsetBackground" class="fixed inset-0 z-0"></div>
+
+    <!-- 主内容容器 -->
+    <div id="pageContainer" class="relative z-10 min-h-screen overflow-hidden">
+        <!-- 第一页 -->
+        <div id="page1" class="absolute inset-0 flex flex-col items-center justify-between px-4 py-12 text-white page-transition">
+            <!-- 标题 -->
+            <div class="mb-8 text-center w-full">
+                <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold text-shadow-lg mb-4 animate-float">
+                    冰威茶话会
+                </h1>
+                <p class="text-[clamp(1.5rem,5vw,3rem)] font-semibold text-shadow animate-float-delay-2">
+                    祝所有高考考生
+                </p>
+            </div>
+
+            <!-- 高考倒计时 -->
+            <div class="mb-12 w-full max-w-4xl">
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-6 shadow-2xl border border-white/20">
+                    <h2 class="text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-center mb-6 text-gold animate-pulse-slow">
+                        高考倒计时
+                    </h2>
+                    <div id="countdown" class="grid grid-cols-4 gap-4 md:gap-8">
+                        <div class="bg-white/5 backdrop-blur rounded-xl p-4 text-center">
+                            <div id="days" class="countdown-number text-[clamp(2rem,8vw,4rem)] font-bold text-gold"></div>
+                            <div class="text-sm md:text-base mt-2">天</div>
+                        </div>
+                        <div class="bg-white/5 backdrop-blur rounded-xl p-4 text-center">
+                            <div id="hours" class="countdown-number text-[clamp(2rem,8vw,4rem)] font-bold text-gold"></div>
+                            <div class="text-sm md:text-base mt-2">时</div>
+                        </div>
+                        <div class="bg-white/5 backdrop-blur rounded-xl p-4 text-center">
+                            <div id="minutes" class="countdown-number text-[clamp(2rem,8vw,4rem)] font-bold text-gold"></div>
+                            <div class="text-sm md:text-base mt-2">分</div>
+                        </div>
+                        <div class="bg-white/5 backdrop-blur rounded-xl p-4 text-center">
+                            <div id="seconds" class="countdown-number text-[clamp(2rem,8vw,4rem)] font-bold text-gold"></div>
+                            <div class="text-sm md:text-base mt-2">秒</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 祝福卡片 -->
+            <div class="w-full max-w-3xl mb-16">
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-8 shadow-2xl border border-white/20 transform transition-all hover:scale-[1.01]">
+                    <p class="text-[clamp(1.1rem,3vw,1.5rem)] leading-relaxed text-center mb-8">
+                        冰威：  愿你提笔高考征战四方，合笔谈笑清风无恙。
+                        所有的努力都不会白费，愿你的名字出现在理想的录取通知书上，
+                        以梦为马，不负韶华。冰威茶话会全体成员，为你加油助威！
+                        高考是人生的一场旅行，沿途有风雨也有阳光。别怕，你努力的每一个深夜都在为今天铺路，放轻松，去拥抱属于你的风景吧～
+                        不管结果如何，你披星戴月的坚持早已让自己闪闪发光。考场里的你，只要认真写下每一笔，就是对青春最好的交代。
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="inline-flex items-center space-x-4">
+                            <div class="w-16 h-1 bg-gold rounded-full"></div>
+                            <i class="fa fa-heart text-gold text-2xl animate-pulse"></i>
+                            <div class="w-16 h-1 bg-gold rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <div class="w-full text-center mt-auto mb-6">
+                <p class="footer-text text-white/80 text-sm md:text-base animate-float-delay-3 font-medium tracking-wide">
+                    冰威茶话会 25 年妄你仍在
+                </p>
+            </div>
+
+            <!-- 翻页按钮 -->
+            <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2">
+                <button id="nextPageBtn" class="bg-white/20 hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300 shadow-lg backdrop-blur">
+                    <i class="fa fa-chevron-down text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 第二页 -->
+        <div id="page2" class="absolute inset-0 flex flex-col items-center justify-between px-4 py-12 text-white page-transition transform translate-x-full">
+            <!-- 新内容区域 -->
+            <div class="w-full max-w-4xl text-center mt-12">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-8 animate-float">高考加油！</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6 shadow-lg border border-white/20 transform transition-all hover:scale-105">
+                        <i class="fa fa-lightbulb-o text-gold text-4xl mb-4 animate-float-delay-1"></i>
+                        <h3 class="text-xl font-semibold mb-3">沉着冷静</h3>
+                        <p class="text-white/90">高考是人生的一个重要里程碑，但不是终点。保持平常心，你一定能发挥出最佳水平。</p>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6 shadow-lg border border-white/20 transform transition-all hover:scale-105">
+                        <i class="fa fa-rocket text-gold text-4xl mb-4 animate-float-delay-2"></i>
+                        <h3 class="text-xl font-semibold mb-3">勇往直前</h3>
+                        <p class="text-white/90">每一份努力都不会白费，每一次付出都有意义。相信自己，你一定能实现梦想。</p>
+                    </div>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-8 shadow-2xl border border-white/20 max-w-2xl mx-auto transform transition-all hover:scale-[1.01]">
+                    <p class="text-[clamp(1.2rem,3vw,1.6rem)] italic text-center mb-4 text-glow">
+                        "寒窗十载，砚冷墨残，今临大考，当怀青云之志。愿子笔走龙蛇，胸藏丘壑，展卷如破竹，蟾宫折桂，鹏程万里！"
+                    </p>
+                    <p class="text-right text-white/80">—— 冰威</p>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <div class="w-full text-center mt-auto mb-6">
+                <p class="footer-text text-white/80 text-sm md:text-base animate-float-delay-3 font-medium tracking-wide">
+                    冰威茶话会 25 年妄你仍在
+                </p>
+            </div>
+
+            <!-- 翻页按钮 -->
+            <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-4">
+                <button id="prevPageBtn" class="bg-white/20 hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300 shadow-lg backdrop-blur">
+                    <i class="fa fa-chevron-up text-2xl"></i>
+                </button>
+                <button id="restartBtn" class="bg-white/20 hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300 shadow-lg backdrop-blur">
+                    <i class="fa fa-refresh text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 夕阳背景动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建夕阳背景
+            const sunsetBackground = document.getElementById('sunsetBackground');
+
+            // 创建渐变背景
+            sunsetBackground.innerHTML = `
+                <div class="absolute inset-0 bg-gradient-sunset opacity-90"></div>
+                <div class="absolute inset-0" id="clouds"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-black/20"></div>
+            `;
+
+            // 创建云动画
+            const cloudsContainer = document.getElementById('clouds');
+            const cloudCount = 10;
+
+            for (let i = 0; i < cloudCount; i++) {
+                const cloud = document.createElement('div');
+                const size = Math.random() * 100 + 100;
+                const opacity = Math.random() * 0.3 + 0.2;
+                const duration = Math.random() * 60 + 30;
+                const delay = Math.random() * 20;
+                const positionY = Math.random() * 50 + 10;
+
+                cloud.className = 'absolute';
+                cloud.style.width = `${size}px`;
+                cloud.style.height = `${size * 0.5}px`;
+                cloud.style.background = 'rgba(255, 255, 255, 0.8)';
+                cloud.style.borderRadius = '50%';
+                cloud.style.opacity = opacity;
+                cloud.style.top = `${positionY}%`;
+                cloud.style.left = '-150px';
+                cloud.style.animation = `floatCloud ${duration}s linear ${delay}s infinite`;
+                cloud.style.filter = 'blur(8px)';
+
+                cloudsContainer.appendChild(cloud);
+            }
+
+            // 添加云动画样式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatCloud {
+                    0% { transform: translateX(-150px); }
+                    100% { transform: translateX(calc(100vw + 150px)); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // 创建星星
+            const starsContainer = document.createElement('div');
+            starsContainer.className = 'absolute inset-0';
+            sunsetBackground.appendChild(starsContainer);
+
+            const starCount = 100;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                const size = Math.random() * 2 + 1;
+                const opacity = Math.random() * 0.8 + 0.2;
+                const duration = Math.random() * 5 + 2;
+                const positionX = Math.random() * 100;
+                const positionY = Math.random() * 100;
+
+                star.className = 'absolute rounded-full';
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.background = 'white';
+                star.style.opacity = opacity;
+                star.style.top = `${positionY}%`;
+                star.style.left = `${positionX}%`;
+                star.style.animation = `twinkle ${duration}s ease-in-out infinite`;
+
+                starsContainer.appendChild(star);
+            }
+
+            // 添加星星闪烁动画样式
+            const starStyle = document.createElement('style');
+            starStyle.textContent = `
+                @keyframes twinkle {
+                    0%, 100% { opacity: 0.2; }
+                    50% { opacity: 1; }
+                }
+            `;
+            document.head.appendChild(starStyle);
+
+            // 翻页功能
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+            const nextPageBtn = document.getElementById('nextPageBtn');
+            const prevPageBtn = document.getElementById('prevPageBtn');
+            const restartBtn = document.getElementById('restartBtn');
+
+            nextPageBtn.addEventListener('click', () => {
+                page1.classList.add('translate-x-[-100%]');
+                page2.classList.remove('translate-x-full');
+            });
+
+            prevPageBtn.addEventListener('click', () => {
+                page1.classList.remove('translate-x-[-100%]');
+                page2.classList.add('translate-x-full');
+            });
+
+            restartBtn.addEventListener('click', () => {
+                page1.classList.remove('translate-x-[-100%]');
+                page2.classList.add('translate-x-full');
+            });
+
+            // 高考倒计时功能
+            function updateCountdown() {
+                // 设置高考日期（6月7日）
+                const now = new Date();
+                let gaokaoYear = now.getFullYear();
+                // 如果当前日期已经过了6月7日，设置为下一年的高考
+                if (now.getMonth() > 5 || (now.getMonth() === 5 && now.getDate() > 7)) {
+                    gaokaoYear++;
+                }
+                const gaokaoDate = new Date(gaokaoYear, 5, 7); // 月份是从0开始的，所以5表示6月
+
+                // 计算剩余时间
+                const diff = gaokaoDate - now;
+
+                // 如果高考已过，计算到下一年高考的时间
+                if (diff < 0) {
+                    gaokaoDate.setFullYear(gaokaoYear + 1);
+                    gaokaoDate.setMonth(5);
+                    gaokaoDate.setDate(7);
+                    gaokaoDate.setHours(0);
+                    gaokaoDate.setMinutes(0);
+                    gaokaoDate.setSeconds(0);
+                    gaokaoDate.setMilliseconds(0);
+                    diff = gaokaoDate - now;
+                }
+
+                // 计算天、时、分、秒
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                // 更新DOM
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+
+                // 添加数字变化动画
+                if (daysEl.textContent !== days.toString().padStart(2, '0')) {
+                    daysEl.classList.add('scale-110', 'text-glow', 'animate-shimmer');
+                    setTimeout(() => daysEl.classList.remove('scale-110', 'text-glow', 'animate-shimmer'), 500);
+                }
+                if (hoursEl.textContent !== hours.toString().padStart(2, '0')) {
+                    hoursEl.classList.add('scale-110', 'text-glow', 'animate-shimmer');
+                    setTimeout(() => hoursEl.classList.remove('scale-110', 'text-glow', 'animate-shimmer'), 500);
+                }
+                if (minutesEl.textContent !== minutes.toString().padStart(2, '0')) {
+                    minutesEl.classList.add('scale-110', 'text-glow', 'animate-shimmer');
+                    setTimeout(() => minutesEl.classList.remove('scale-110', 'text-glow', 'animate-shimmer'), 500);
+                }
+                if (secondsEl.textContent !== seconds.toString().padStart(2, '0')) {
+                    secondsEl.classList.add('scale-110', 'text-glow', 'animate-shimmer');
+                    setTimeout(() => secondsEl.classList.remove('scale-110', 'text-glow', 'animate-shimmer'), 500);
+                }
+
+                daysEl.textContent = days.toString().padStart(2, '0');
+                hoursEl.textContent = hours.toString().padStart(2, '0');
+                minutesEl.textContent = minutes.toString().padStart(2, '0');
+                secondsEl.textContent = seconds.toString().padStart(2, '0');
+            }
+
+            // 初始化倒计时
+            updateCountdown();
+
+            // 每秒更新一次
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
